@@ -1,0 +1,14 @@
+<header class="header">
+  <h1>Todo Manager</h1>
+  <form (ngSubmit)="addTodo()" #todoForm="ngForm">
+    <input
+      class="new-todo"
+      placeholder="Write Your Todo!"
+      [(ngModel)]="newTodo"
+      name="todo"
+      required
+      autofocus
+    />
+    <button type="submit" [disabled]="!todoForm.form.valid">Add Todo</button>
+  </form>
+</header>

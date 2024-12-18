@@ -1,0 +1,37 @@
+.new-todo,
+.header {
+  text-align: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.header .new-todo {
+  margin-top: 15px;
+  padding: 10px 15px;
+  width: 80%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.header .new-todo:focus {
+  box-shadow: 0 0 8px rgba(100, 149, 237, 0.5); /* Light blue glow */
+  border-color: #6495ed; /* Cornflower Blue */
+}
+
+@media (max-width: 500px) {
+  .header h1 {
+    font-size: 1.5rem; /* Adjust font size for small screens */
+  }
+}

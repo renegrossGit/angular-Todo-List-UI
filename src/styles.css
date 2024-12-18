@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 800px; /* Restrict max width on large screens */
+  margin: 0 auto; /* Center the app horizontally */
+  padding: 10px; /* Add some breathing room */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .filters {
+    gap: 10px; /* Reduce spacing for smaller screens */
+  }
+
+  .filters li {
+    font-size: 0.9rem; /* Slightly smaller text on smaller screens */
+  }
+
+  .filters a {
+    padding: 5px 8px; /* Compact padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    gap: 8px; /* Further reduce spacing for very small screens */
+  }
+
+  .filters li {
+    font-size: 0.8rem; /* Even smaller text for very small screens */
+  }
+
+  .filters a {
+    padding: 4px 6px; /* Compact padding for small buttons */
+  }
+}
+
+

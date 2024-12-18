@@ -1,0 +1,101 @@
+/* Ensures the footer always stays at the bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  /* Main content should grow and push the footer to the bottom */
+  .main {
+    flex-grow: 1;
+    padding-bottom: 60px; /* Adds space at the bottom for the footer */
+  }
+  
+  /* Footer styles */
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 15px 20px;
+    border-top: 1px solid #eaeaea;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    flex-wrap: wrap; /* Ensures items wrap on smaller screens */
+  }
+  
+  /* Todo item count style */
+  .footer .todo-count {
+    font-size: 1rem;
+    color: #333;
+    flex-grow: 1; /* Ensures it takes available space */
+    text-align: left; /* Aligns todo count to the left */
+  }
+  
+/* Clear all button style */
+.footer .clear-all {
+    padding: 8px 15px;
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Adds space between the todo count and button */
+    margin-right: 30px; /* Ensures the button doesn't get cut off on the right */
+    flex-shrink: 0; /* Prevents shrinking on small screens */
+  }
+  
+  .footer .clear-all:hover {
+    background-color: #c82333; /* Darker Red */
+  }
+  
+  /* Media Queries for Responsiveness */
+  
+  /* Tablet view (max-width 768px) */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 12px 15px; /* Slightly reduce padding for smaller screens */
+      justify-content: center; /* Centers items horizontally */
+    }
+  
+    .footer .todo-count {
+      font-size: 0.9rem; /* Smaller font size for better readability */
+    }
+  
+    .footer .clear-all {
+      font-size: 0.9rem; /* Smaller font size for button */
+      padding: 7px 12px; /* Slightly reduced padding for button */
+      width: 100%; /* Make button take full width */
+      margin-left: 0; /* Remove margin */
+      margin-top: 10px; /* Adds spacing between count and button */
+    }
+  }
+  
+/* Mobile view (max-width 480px) */
+@media (max-width: 480px) {
+    .footer {
+        padding: 12px 15px; /* Slightly reduce padding for smaller screens */
+        justify-content: center; /* Centers items horizontally */
+      }
+    
+      .footer .todo-count {
+        font-size: 0.9rem; /* Smaller font size for better readability */
+      }
+    
+      .footer .clear-all {
+        font-size: 0.9rem; /* Smaller font size for button */
+        padding: 7px 12px; /* Slightly reduced padding for button */
+        width: 100%; /* Make button take full width */
+        margin-left: 0; /* Remove margin */
+        margin-top: 10px; /* Adds spacing between count and button */
+      }
+  }
+  
+  

@@ -1,0 +1,38 @@
+.main {
+  position: relative;
+  padding: 20px;
+}
+
+.main label {
+  display: inline-block;
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.main .toggle-all {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  appearance: none; /* Removes default browser styling */
+  background-color: #f5f5f5;
+  border: 2px solid #ccc;
+  border-radius: 50%; /* Optional: makes it look like a round checkbox */
+  transition: all 0.3s ease;
+}
+
+.main .toggle-all:checked {
+  background-color: #007bff; /* Blue fill when checked */
+  border-color: #007bff; /* Border matches the fill */
+  color: white;
+}
+
+.main .todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0; /* Added margin to separate from the "Mark all as completed" section */
+}

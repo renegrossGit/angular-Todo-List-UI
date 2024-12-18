@@ -1,59 +1,59 @@
-# AngularTodoList
+# Angular Todo UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+This project represents the **user interface** of a simple Angular Todo app built using Angular 19. The app features a clean and user-friendly design, with a responsive layout that adapts to various screen sizes. The app includes various UI components such as Header, Filter, Main, Footer, and individual Todo items, all of which are styled to ensure a visually appealing and accessible interface.
 
-## Development server
+## UI Components:
+- **Header**: Displays the app title and a styled input field for adding new todos.
+- **Filter**: Allows users to filter todos by All, Active, or Completed states (styled as clickable options).
+- **Main**: Contains the todo list with checkboxes for toggling the completion of items (styled for clear visibility).
+- **Footer**: Shows the total number of todo items and a **"Clear All"** button (styled for prominence and easy access).
 
-To start a local development server, run:
+## Features:
+- **Responsive Design**: The layout adapts seamlessly to different screen sizes, from desktop to mobile.
+- **Clean and Modern Look**: The app follows a minimalistic design with well-spaced components for an organized and uncluttered view.
+- **Symmetric Layout**: Components are aligned for a symmetrical and balanced appearance.
+- **Mobile-Friendly**: On smaller screens, elements like buttons take up full width for better usability.
+---
 
+## Installation
+
+Follow these steps to set up the project locally:
+
+### Prerequisites:
+1. **Node.js**: Ensure that you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
+2. **Angular CLI**: If you don't have Angular CLI installed, run the following command to install it globally:
+   ```bash
+   npm install -g @angular/cli
+
+### Install Dependencies
+```bash
+npm install
+```
+### Run the Application
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app will now be available at http://localhost:4200.
 
-## Code scaffolding
+## Notes
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Is the user interface visually appealing and easy to navigate?
 
-```bash
-ng generate component component-name
-```
+- The Filter section uses styled links that provide a clean way to categorize and view todos, even though no functionality is connected yet.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Does the interface layout adapt well to different screen sizes and orientations?
 
-```bash
-ng generate --help
-```
+- The app's interface is fully responsive, meaning it adapts to small and large screen sizes without breaking the layout.
+- On small screens, the "Clear All" button takes up the entire width of the screen for easier interaction.
 
-## Building
 
-To build the project run:
+### Does the interface include the required components and features, such as forms and buttons?
 
-```bash
-ng build
-```
+Yes, the interface includes all required components and features:
+- **Header**: A form with an input field for adding new Todo items, using Angular's template-driven forms.
+- **Todo List**: Displays Todo items with checkboxes (functionality not yet implemented).
+- **Footer**: Shows the number of Todo items and includes a "Clear All" button (functionality not implemented).
+- **Buttons**: Interactive buttons for adding and clearing Todos, styled for easy use.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The interface meets the design requirements with forms and buttons, ensuring a user-friendly experience.

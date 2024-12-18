@@ -1,0 +1,46 @@
+.filter {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.filters {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 15px;
+}
+
+.filters li {
+  font-size: 1rem;
+}
+
+.filters a {
+  text-decoration: none;
+  color: #666;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  /* Reduced transition duration and limited properties */
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.filters a:hover {
+  background-color: #f0f0f0; /* Subtle hover background */
+  border-color: #ccc; /* Adds a light border */
+}
+
+.filters a.selected {
+  color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  cursor: default;
+}
+
+@media (max-width: 500px) {
+  .filters a {
+    font-size: 0.8rem; /* Smaller font for very small screens */
+    padding: 4px 8px; /* Reduce padding */
+  }
+}
