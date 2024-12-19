@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
+import { FilterEnum } from '../../types/filter-enum';
+import { TodosServiceService } from '../../service/todos-service.service';
 
 @Component({
   selector: 'app-filter',
@@ -8,5 +10,17 @@ import { Component } from '@angular/core';
   styleUrl: './filter.component.css'
 })
 export class FilterComponent {
+  // Signal to store the current filter
+  FilterEnum = FilterEnum;
+  currentFilter: Signal<FilterEnum>;
 
+  constructor(private todosService: TodosServiceService) {
+    // Subscribe to the current filter state from the service
+    this.currentFilter = this.todosService.getCurrentFilter();
+  }
+
+  // Set a new filter by interacting with the service
+  setFilter(filter: FilterEnum): void {
+    this.todosService.setFilter(filter);
+  }
 }

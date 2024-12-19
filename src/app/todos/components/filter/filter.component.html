@@ -1,13 +1,31 @@
 <div class="filter">
   <ul class="filters">
     <li>
-      <a href="/" class="selected">All</a>
+      <a
+        href="#"
+        [class.selected]="currentFilter() === FilterEnum.ALL"
+        (click)="setFilter(FilterEnum.ALL)"
+      >
+        All
+      </a>
     </li>
     <li>
-      <a href="/">Active</a>
+      <a
+        href="#"
+        [class.selected]="currentFilter() === FilterEnum.ACTIVE"
+        (click)="setFilter(FilterEnum.ACTIVE)"
+      >
+        Active
+      </a>
     </li>
     <li>
-      <a href="/">Completed</a>
+      <a
+        href="#"
+        [class.selected]="currentFilter() === FilterEnum.COMPLETED"
+        (click)="setFilter(FilterEnum.COMPLETED)"
+      >
+        Completed
+      </a>
     </li>
   </ul>
 </div>

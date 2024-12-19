@@ -1,10 +1,21 @@
-<li class="todo-item">
+<li class="todo-item" [ngClass]="{ completed: todo.completed, editing: isEditing }">
   <div class="view">
-    <input class="toggle" type="checkbox" />
-    <label>ToDo Content</label>
-    <button class="destroy"></button>
+    <input
+      class="toggle"
+      type="checkbox"
+      [checked]="todo.completed"
+      (change)="toggle.emit(todo.id)"
+    />
+    <label (dblclick)="enterEditMode()">{{ todo.task }}</label>
+    <button class="destroy" (click)="delete.emit(todo.id)"></button>
   </div>
-  <div class="edit-container">
-    <input class="edit" />
+  <div class="edit-container" *ngIf="isEditing">
+    <input
+      class="edit"
+      [(ngModel)]="editedTask"
+      (blur)="saveEdit()"
+      (keyup.enter)="saveEdit()"
+      (keyup.esc)="cancelEdit()"
+    />
   </div>
 </li>
