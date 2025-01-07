@@ -1,10 +1,11 @@
 import { Component, computed } from '@angular/core';
 import { TodosServiceService } from '../../service/todos-service.service';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })

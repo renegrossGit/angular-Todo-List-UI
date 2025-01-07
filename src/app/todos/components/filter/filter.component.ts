@@ -1,11 +1,12 @@
 import { Component, Signal } from '@angular/core';
 import { FilterEnum } from '../../types/filter-enum';
 import { TodosServiceService } from '../../service/todos-service.service';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [],
+  imports: [SharedModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css'
 })

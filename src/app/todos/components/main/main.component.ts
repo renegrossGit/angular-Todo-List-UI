@@ -4,12 +4,13 @@ import { TodoInterface } from './../../types/todo-interface';
 import { TodoComponent } from './todo/todo.component';
 import { NgFor } from '@angular/common';
 import { FilterEnum } from '../../types/filter-enum';
+import { SharedModule } from '../shared/shared.module';
 
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [TodoComponent, NgFor],
+  imports: [TodoComponent, NgFor, SharedModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })

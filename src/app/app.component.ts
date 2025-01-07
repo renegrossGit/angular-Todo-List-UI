@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodosComponent } from './todos/todos.component';
 
@@ -7,8 +7,11 @@ import { TodosComponent } from './todos/todos.component';
   standalone:true,
   imports: [RouterOutlet, TodosComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
+
 export class AppComponent {
   title = 'Angular-Todo-List';
+
+
 }

@@ -1,6 +1,8 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { TodoInterface } from './../types/todo-interface'; // Importiere das Todo-Interface
 import { FilterEnum } from './../types/filter-enum';
+import { TodosDaoService } from './todos-dao.service';
+import { tap } from 'rxjs';
 
 
 @Injectable({
@@ -10,6 +12,20 @@ export class TodosServiceService {
   private todos = signal<TodoInterface[]>([]);
   private todosView = signal<TodoInterface[]>([]); // Filtered list for the view
   private currentFilter = signal<FilterEnum>(FilterEnum.ALL); // Current active filter
+
+  constructor(private todosDaoService: TodosDaoService) {
+    // Load initial todos from the backend
+    this.loadTodos();
+  }
+
+  private loadTodos(): void {
+    this.todosDaoService.getTodos().pipe(
+      tap((todos) => {
+        this.todos.set(todos);
+        this.applyFilter();
+      })
+    ).subscribe();
+  }
 
   getTodos(): Signal<TodoInterface[]> {
     return this.todos;
@@ -29,9 +45,12 @@ export class TodosServiceService {
       task,
       completed: false,
     };
-    this.todos.update((todos) => [...todos, newTodo]);
-    this.applyFilter(); // Reapply filter after adding a todo
-    console.log('Aktuelle Todos:', this.todos());
+    this.todosDaoService.createTodo(newTodo).pipe(
+      tap((todo) => {
+        this.todos.update((todos) => [...todos, todo]);
+        this.applyFilter();
+      })
+    ).subscribe();
   }
 
   // Set a new filter
@@ -55,57 +74,104 @@ export class TodosServiceService {
       }
     });
     this.todosView.set(filteredTodos); // Update the filtered view
-    console.log('View Todos:', this.todosView());
+    //console.log('View Todos:', this.todosView());
   }
 
 
-    // Toggle the completed state of a Todo
-    toggleTodoCompleted(id: number): void {
-      this.todos.update((todos) =>
-        todos.map((todo) =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        )
-      );
-      this.applyFilter(); // Reapply filter after toggling
-    }
+  toggleTodoCompleted(id: number): void {
+    this.todosDaoService.getTodoById(id).pipe(
+      tap((todo) => {
+        if (todo) {
+          todo.completed = !todo.completed;
+          this.todosDaoService.updateTodo(id, todo).pipe(
+            tap(() => {
+              this.todos.update((todos) =>
+                todos.map((t) => (t.id === id ? { ...t, completed: todo.completed } : t))
+              );
+              this.applyFilter();
+            })
+          ).subscribe();
+        }
+      })
+    ).subscribe();
+  }
 
-    toggleAll(completed: boolean): void {
-      const updatedTodos = this.todos().map((todo) => ({
-        ...todo,
-        completed,
-      }));
-      this.todos.set(updatedTodos);
-      this.applyFilter(); // Update the view
-    }
+  toggleAll(completed: boolean): void {
+    this.todos().forEach((todo) => {
+      if (todo.id !== undefined) { // Ensure todo.id is defined
+        todo.completed = completed;
+        this.todosDaoService.updateTodo(todo.id, todo).pipe(
+          tap(() => {
+            this.todos.update((todos) =>
+              todos.map((t) => (t.id === todo.id ? { ...t, completed } : t))
+            );
+            this.applyFilter();
+          })
+        ).subscribe();
+      } else {
+        console.error('Todo ID is undefined:', todo);
+      }
+    });
+  }
 
     areAllTodosCompleted(): boolean {
       return this.todos().every((todo) => todo.completed);
     }
 
     toggleTodo(id: number): void {
-      const updatedTodos = this.todos().map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      );
-      this.todos.set(updatedTodos);
-      this.applyFilter();
+      this.todosDaoService.getTodoById(id).pipe(
+        tap((todo) => {
+          if (todo) {
+            todo.completed = !todo.completed;
+            this.todosDaoService.updateTodo(id, todo).pipe(
+              tap(() => {
+                this.todos.update((todos) =>
+                  todos.map((t) => (t.id === id ? { ...t, completed: todo.completed } : t))
+                );
+                this.applyFilter();
+              })
+            ).subscribe();
+          }
+        })
+      ).subscribe();
     }
 
     deleteTodo(id: number): void {
-      const updatedTodos = this.todos().filter((todo) => todo.id !== id);
-      this.todos.set(updatedTodos);
-      this.applyFilter();
+      this.todosDaoService.deleteTodo(id).pipe(
+        tap(() => {
+          this.todos.update((todos) => todos.filter((todo) => todo.id !== id));
+          this.applyFilter();
+        })
+      ).subscribe();
     }
     
     editTodo(updatedTodo: TodoInterface): void {
-      const updatedTodos = this.todos().map((todo) =>
-        todo.id === updatedTodo.id ? updatedTodo : todo
-      );
-      this.todos.set(updatedTodos);
-      this.applyFilter();
+      if (updatedTodo.id !== undefined) { // Ensure updatedTodo.id is defined
+        this.todosDaoService.updateTodo(updatedTodo.id, updatedTodo).pipe(
+          tap(() => {
+            this.todos.update((todos) =>
+              todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
+            );
+            this.applyFilter();
+          })
+        ).subscribe();
+      } else {
+        console.error('Todo ID is undefined:', updatedTodo);
+      }
     }
 
     clearAllTodos(): void {
-      // Set the `todos` signal to an empty array, which clears all the todos
-      this.todos.set([]);
+      this.todos().forEach((todo) => {
+        if (todo.id !== undefined) { // Ensure todo.id is defined
+          this.todosDaoService.deleteTodo(todo.id).pipe(
+            tap(() => {
+              this.todos.update((todos) => todos.filter((t) => t.id !== todo.id));
+              this.applyFilter();
+            })
+          ).subscribe();
+        } else {
+          console.error('Todo ID is undefined:', todo);
+        }
+      });
     }
 }

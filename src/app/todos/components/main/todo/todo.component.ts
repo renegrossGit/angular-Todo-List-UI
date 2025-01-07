@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoInterface } from '../../../types/todo-interface';
 import { NgClass, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [NgClass, NgIf, FormsModule],
+  imports: [NgClass, NgIf, FormsModule, SharedModule],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
 })
